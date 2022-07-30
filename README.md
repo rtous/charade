@@ -1,47 +1,9 @@
-# charade
+# CHARADE dataset
 
-## 2D keypoints with OpenPose
+## Description
 
-cd /Users/rtous/DockerVolume/openpose
+This repository contains the CHARADE dataset, consisting of selected frames from the movie Charade. The selected frames contain partial body camera shots, in which a significant part of the body is not visible. The dataset is intended to facilitate the qualitative evaluation and comparison of 2D human pose completion methods such as CompletePose (for which the dataset was created). 
 
-./build/examples/openpose/openpose.bin --image_dir ../charade/img --display 0 --write_json ../charade/result/2D/keypoints --write_images ../charade/result/2D/images --face --hand
+## Files
 
-## 3D joints
-
-cd /Users/rtous/DockerVolume/flashback_smplify-x
-
-source venv/bin/activate 
-
-python smplifyx/main.py --config cfg_files/fit_smplx.yaml \
-    --data_folder /Users/rtous/DockerVolume/charade/input \
-    --use_cuda="False" \
-    --output_folder /Users/rtous/DockerVolume/charade/result/3D \
-    --visualize="False" \
-    --model_folder models \
-    --vposer_ckpt models/vposer_v1_0 \
-    --part_segm_fn smplx_parts_segm.pkl
-
-## 2D keypoints with HRNet
-
-cd charade
-
-sshpass -p 'so0jyCB&661e' scp -P 2275 -r input/images/* jpoveda@gso.ac.upc.edu:simple-HigherHRNet/input
-
-sshpass -p 'so0jyCB&661e' ssh -p 2275 jpoveda@gso.ac.upc.edu
-
-cd simple-HigherHRNet/
-
-source myvenv/bin/activate 
-
-python python hrnet_test.py
-
-exit
-
-sshpass -p 'so0jyCB&661e' scp -P 2275 -r jpoveda@gso.ac.upc.edu:simple-HigherHRNet/output/* input/keypointsHRNET
-
-
-
-
-## copyright
-
-https://guides.lib.umich.edu/permissions/films
+ File images.zip contains 82 frames in .png format. They include 9 medium full shots (MFS), 28 medium shots (MS), 31 medium close-up shots (MCU), 12 close-up shots (CU) and 2 extreme close-up shots (ECU). Files keypointsOpenPose.zip and keypointsHRNET.zip contain the 2D pose keypoints obtained with OpenPose and HRNET respectively.
